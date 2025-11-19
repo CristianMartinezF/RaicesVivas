@@ -1,0 +1,3086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raíces Vivas - Cultura Wayuu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        .crafts-section {
+        padding: 4rem 0;
+        background-color: var(--light-color);
+    }
+    
+    .crafts-section h2 {
+        text-align: center;
+        color: var(--wayuu-red);
+        margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        color: var(--dark-color);
+        font-size: 1.1rem;
+    }
+    
+    .crafts-tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+        padding: 0.8rem 1.8rem;
+        background-color: white;
+        border: none;
+        border-radius: 30px;
+        margin: 0 0.5rem 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        color: var(--dark-color);
+    }
+    
+    .tab-btn.active {
+        background-color: var(--wayuu-red);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(200, 67, 67, 0.3);
+    }
+    
+    .tab-btn:hover:not(.active) {
+        background-color: var(--wayuu-blue);
+        color: white;
+    }
+    
+    .tab-content {
+        display: none;
+    }
+    
+    .tab-content.active {
+        display: block;
+        animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .crafts-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+    
+    .craft-item {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+    }
+    
+    .craft-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .craft-img-container {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+    }
+    
+    .craft-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+    
+    .craft-item:hover .craft-img-container img {
+        transform: scale(1.05);
+    }
+    
+    .reviews-section {
+    padding: 4rem 0;
+    background-color: #fff7f0;
+    }
+
+    .reviews-section h2 {
+    color: var(--wayuu-red);
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    text-align: center;
+    position: relative;
+    }
+
+    .reviews-section h2::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: var(--wayuu-blue);
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+
+    .reviews-section .section-subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    color: var(--dark-color);
+    font-size: 1.05rem;
+    opacity: 0.9;
+    }
+
+    .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    }
+
+    .review-card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 1.8rem;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .review-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .review-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--wayuu-red), var(--wayuu-blue));
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .review-name-role {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .review-name {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .review-tag {
+        font-size: 0.85rem;
+        color: var(--wayuu-blue);
+    }
+
+    .review-text {
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .review-meta {
+        font-size: 0.85rem;
+        color: #777;
+    }
+
+    .rating-widget {
+        margin-top: 3rem;
+        text-align: center;
+        background-color: #fdf2ea;
+        border-radius: 12px;
+        padding: 2rem 1.5rem;
+        border: 1px dashed var(--wayuu-red);
+    }
+
+    .rating-widget h3 {
+        margin-top: 0;
+        color: var(--wayuu-red);
+        font-size: 1.4rem;
+    }
+
+    .rating-widget p {
+        margin: 0.4rem 0 1rem;
+        font-size: 0.95rem;
+    }
+
+    .rating-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 1rem 0 1.5rem;
+        flex-wrap: wrap;
+    }
+    .rating-btn {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: none;
+        background-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.25s;
+    }
+
+    .rating-btn.like {
+        color: #2ecc71; /* verde */
+    }
+
+    .rating-btn.dislike {
+        color: #e74c3c; /* rojo */
+    }
+
+    .rating-btn.why {
+        color: #f1c40f; /* amarillo */
+    }
+
+    .rating-btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    .rating-btn.active {
+        transform: scale(1.05);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    .rating-message {
+        font-weight: 500;
+        margin-bottom: 1rem;
+        color: var(--dark-color);
+    }
+
+    .rating-comment-group {
+         max-width: 600px;
+        margin: 0 auto;
+        text-align: left;
+        display: none;
+    }
+
+    .rating-comment-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--dark-color);
+    }
+
+    .rating-comment-group textarea {
+        width: 100%;
+        padding: 0.75rem 0.9rem;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        resize: vertical;
+        min-height: 90px;
+        font-family: inherit;
+        font-size: 0.95rem;
+    }
+
+    .rating-comment-note {
+        font-size: 0.85rem;
+        color: #777;
+        margin-top: 0.4rem;
+    }
+
+    .submit-rating-btn {
+    margin-top: 0.8rem;
+    background: linear-gradient(to right, var(--wayuu-red), var(--primary-color));
+    color: #ffffff;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex; /* 🔴 IMPORTANTE: que NO esté en none */
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.submit-rating-btn i {
+    font-size: 0.9rem;
+}
+
+.submit-rating-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(0,0,0,0.2);
+}
+
+    @media (max-width: 768px) {
+        .reviews-section {
+            padding: 3rem 0;
+        }
+    }
+
+    .craft-overlay {
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        right: 0;
+        background: rgba(58, 124, 165, 0.9);
+        color: white;
+        padding: 1.5rem;
+        transition: bottom 0.3s;
+    }
+    
+    .craft-item:hover .craft-overlay {
+        bottom: 0;
+    }
+    
+    .craft-overlay h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .craft-overlay p {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .craft-price {
+        display: block;
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+    }
+    
+    .craft-btn {
+        display: inline-block;
+        background-color: var(--wayuu-red);
+        color: white;
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s;
+    }
+    
+    .craft-btn:hover {
+        background-color: white;
+        color: var(--wayuu-red);
+    }
+    
+    .craft-info {
+        padding: 1.5rem;
+    }
+    
+    .craft-info h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        color: var(--wayuu-blue);
+    }
+    
+    .craft-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+    }
+    
+    .craft-meta i {
+        margin-right: 5px;
+        color: var(--wayuu-red);
+    }
+    
+    .crafts-description {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-top: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .crafts-description h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+    }
+    
+    .crafts-description h3 i {
+        margin-right: 10px;
+        color: var(--wayuu-red);
+    }
+    
+    .crafts-description p {
+        margin-bottom: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .crafts-gallery {
+            grid-template-columns: 1fr;
+        }
+    }
+
+        :root {
+            --primary-color: #4a6b3a;
+            --secondary-color: #e8c07d;
+            --accent-color: #9c6644;
+            --light-color: #f8f4e3;
+            --dark-color: #2c2c2c;
+            --wayuu-red: #c84343;
+            --wayuu-blue: #3a7ca5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark-color);
+            line-height: 1.6;
+            background-color: var(--light-color);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--wayuu-red), var(--primary-color));
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo-img {
+        width: 150px;
+        height: 150px;
+        margin-right: 15px;
+        object-fit: contain;
+      
+        
+        }
+        
+        /* Si necesitas ajustar el tamaño del texto del logo */
+        .logo-text h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: white;
+        }
+        
+        .logo-text p {
+            margin: 0;
+            font-style: italic;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        
+        nav {
+            background-color: var(--wayuu-blue);
+            padding: 0.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav a i {
+            margin-right: 8px;
+        }
+        
+        nav a:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://ojopelaomagazine.co/wp-content/uploads/2024/01/Nelson-1-1200x800.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .floating-consultant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            background-color: var(--wayuu-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .floating-consultant:hover {
+            transform: scale(1.1);
+            background-color: var(--primary-color);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(200, 67, 67, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(200, 67, 67, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(200, 67, 67, 0); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            margin: 4rem 0;
+        }
+        
+        h2 {
+            color: var(--wayuu-red);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--wayuu-blue);
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 350px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--wayuu-red);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 1.8rem;
+        }
+        
+        .card h3 {
+            color: var(--wayuu-blue);
+            margin-top: 0;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--wayuu-red);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--wayuu-blue);
+            color: var(--wayuu-blue);
+            margin-left: 10px;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--wayuu-blue);
+            color: white;
+        }
+        
+        
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .impact-item {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            text-align: center;
+            border-top: 5px solid var(--wayuu-red);
+        }
+        
+        .impact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .impact-item i {
+            font-size: 2.5rem;
+            color: var(--wayuu-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .impact-item h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .custom-plan {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            text-align: center;
+            border: 2px dashed var(--wayuu-blue);
+        }
+        
+        .custom-plan h3 {
+            color: var(--wayuu-red);
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+        
+        .custom-plan p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            margin: 1rem;
+            position: relative;
+            padding-top: 60px;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: var(--wayuu-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .step h4 {
+            color: var(--primary-color);
+            margin-top: 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #1a1a1a);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-section {
+            margin: 1rem;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--wayuu-red);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            line-height: 1.8;
+        }
+        
+        .footer-section a {
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal de asesoría */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: slideDown 0.4s;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--wayuu-red);
+        }
+        
+        .modal h3 {
+            color: var(--wayuu-blue);
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        /* Páginas específicas de experiencias */
+        .experience-header {
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .experience-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .experience-header h1 {
+            position: relative;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .experience-header p {
+            position: relative;
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .plan-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .plan-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .plan-content {
+            padding: 1.5rem;
+        }
+        
+        .plan-content h3 {
+            color: var(--wayuu-red);
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .plan-price {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .plan-features {
+            list-style-type: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .plan-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-features li::before {
+            content: "✓";
+            color: var(--wayuu-blue);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .plan-duration {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            .step {
+                margin-bottom: 2rem;
+            }
+            
+            .experience-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .experience-header p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+        }
+        .workshop-detail {
+            margin: 3rem 0;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .workshop-detail img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            max-height: 400px;
+            object-fit: cover;
+        }
+        
+        .workshop-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .workshop-info-item {
+            flex: 1;
+            min-width: 200px;
+            margin: 0.5rem;
+        }
+        
+        .workshop-info-item i {
+            color: var(--wayuu-blue);
+            margin-right: 8px;
+        }
+        
+        .workshop-content {
+            margin: 2rem 0;
+        }
+        
+        .workshop-content h3 {
+            color: var(--wayuu-red);
+            margin-top: 2rem;
+        }
+        
+        .workshop-includes, .workshop-schedule {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .workshop-includes h4, .workshop-schedule h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .workshop-includes ul, .workshop-schedule ul {
+            padding-left: 20px;
+        }
+        
+        .workshop-includes li, .workshop-schedule li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--wayuu-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-button i {
+            margin-right: 8px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact-section {
+        background: linear-gradient(rgba(58, 124, 165, 0.9), rgba(58, 124, 165, 0.9)), url('https://images.unsplash.com/photo-1580502304784-8985b7eb7260?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        padding: 4rem 0;
+        color: white;
+        }
+        
+        .contact-section h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            padding: 2.5rem;
+            background-color: rgba(255,255,255,0.9);
+            color: var(--dark-color);
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Estilos del formulario */
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            flex: 1;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            color: var(--wayuu-blue);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--wayuu-blue);
+            box-shadow: 0 0 0 3px rgba(58, 124, 165, 0.2);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--wayuu-red), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(200, 67, 67, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(200, 67, 67, 0.4);
+        }
+        
+        /* Estilos de la información de contacto */
+        .info-card {
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .info-card:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--wayuu-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .info-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .info-card p {
+            margin: 0.3rem 0;
+            opacity: 0.9;
+        }
+        
+        .social-media {
+            margin-top: 2rem;
+        }
+        
+        .social-media h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--wayuu-red);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .contact-form, .contact-info {
+                padding: 1.5rem;
+            }
+        }
+
+        .turismo-section {
+        padding: 4rem 0;
+        background-color: #f9f9f9;
+    }
+    
+    .turismo-tabs {
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0 3rem;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .tab-btn {
+        padding: 12px 25px;
+        background-color: white;
+        border: 2px solid var(--wayuu-blue);
+        color: var(--wayuu-blue);
+        border-radius: 30px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .tab-btn:hover {
+        background-color: rgba(58, 124, 165, 0.1);
+    }
+    
+    .tab-btn.active {
+        background-color: var(--wayuu-blue);
+        color: white;
+    }
+    
+    .tab-pane {
+        display: none;
+    }
+    
+    .tab-pane.active {
+        display: block;
+    }
+    
+    .turismo-card {
+        display: flex;
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .turismo-img {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .turismo-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .turismo-details {
+        flex: 1;
+        padding: 2rem;
+    }
+    
+    .turismo-details h3 {
+        margin-top: 0;
+        color: var(--wayuu-red);
+        font-size: 1.5rem;
+    }
+    
+    .turismo-desc {
+        margin: 1rem 0;
+        color: var(--dark-color);
+        line-height: 1.6;
+    }
+    
+    .turismo-highlights {
+        margin: 1.5rem 0;
+    }
+    
+    .turismo-highlights h4 {
+        color: var(--primary-color);
+        margin-bottom: 0.8rem;
+    }
+    
+    .turismo-highlights ul {
+        padding-left: 0;
+        list-style: none;
+    }
+    
+    .turismo-highlights li {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .turismo-highlights i {
+        color: var(--wayuu-blue);
+    }
+    
+    .turismo-meta {
+        display: flex;
+        gap: 1.5rem;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+    }
+    
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #555;
+    }
+    
+    .meta-item.price {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    
+    .alojamiento-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .alojamiento-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .alojamiento-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .alojamiento-info {
+        padding: 1.5rem;
+    }
+    
+    .alojamiento-info h3 {
+        margin-top: 0;
+        color: var(--wayuu-blue);
+    }
+    
+    .alojamiento-info p {
+        margin: 0.8rem 0;
+        color: var(--dark-color);
+    }
+    
+    .alojamiento-price {
+        margin: 1.2rem 0;
+    }
+    
+    .alojamiento-price span {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    
+    .alojamiento-price small {
+        display: block;
+        font-size: 0.8rem;
+        color: #666;
+    }
+    
+    @media (max-width: 768px) {
+        .turismo-card {
+            flex-direction: column;
+        }
+        
+        .turismo-img {
+            min-height: 250px;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+            <div class="logo-circle">
+                <img src="logo.jpg" alt="Logo Raíces Vivas" class="logo-img">
+            </div>
+            <div class="logo-text">
+                <h1>Raíces Vivas</h1>
+                <p>"Descubre, saborea y lleva contigo el alma de la cultura Wayuu"</p>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="#talleres"><i class="fas fa-utensils"></i> Talleres</a></li>
+            <li><a href="#artesanias"><i class="fas fa-tshirt"></i> Artesanías</a></li>
+            <li><a href="#turismo"><i class="fas fa-map-marked-alt"></i> Turismo</a></li>
+            <li><a href="#impacto"><i class="fas fa-hands-helping"></i> Impacto</a></li>
+            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <section id="inicio" class="hero">
+        <h1>Vive la auténtica cultura Wayuu</h1>
+        <p>Sumérgete en las tradiciones ancestrales de la comunidad Wayuu a través de experiencias únicas que benefician directamente a sus miembros.</p>
+        <a href="#talleres" class="btn">Explora nuestras experiencias</a>
+        <a href="#custom-plan" class="btn btn-outline">Crea tu plan personalizado</a>
+    </section>
+    
+    <div class="floating-consultant" id="consultantBtn">
+        <i class="fas fa-comments"></i>
+    </div>
+    
+    <!-- Modal de asesoría -->
+    <div id="consultantModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Asesoría Personalizada</h3>
+            <p>Déjanos tus datos y un asesor cultural Wayuu se pondrá en contacto contigo para ayudarte a planificar tu experiencia perfecta.</p>
+            <form>
+                <div class="form-group">
+                    <label for="modal-nombre">Nombre completo:</label>
+                    <input type="text" id="modal-nombre" name="modal-nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-email">Correo electrónico:</label>
+                    <input type="email" id="modal-email" name="modal-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-telefono">Teléfono:</label>
+                    <input type="tel" id="modal-telefono" name="modal-telefono">
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-interes">¿Qué te interesa conocer?</label>
+                    <textarea id="modal-interes" name="modal-interes" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Enviar solicitud</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="container">
+        <section id="descripcion">
+            <h2>La Experiencia Wayuu</h2>
+            <p>Raíces Vivas te ofrece una conexión auténtica con la comunidad Wayuu, uno de los pueblos indígenas más importantes de Colombia. A través de nuestras experiencias, no solo aprenderás sobre su rica cultura, sino que contribuirás directamente al desarrollo sostenible de sus comunidades en La Guajira.</p>
+        </section>
+        
+        <section id="talleres">
+        <h2>Talleres Vivenciales Wayuu</h2>
+        <p>Participa en talleres dirigidos por miembros de la comunidad Wayuu, donde aprenderás sus tradiciones directamente de los guardianes de estos conocimientos ancestrales.</p>
+        
+        <div class="card-container">
+            <div class="card">
+                <div class="card-badge">Más popular</div>
+                <img src="https://th.bing.com/th/id/R.91175ba3da2b03353f38af5c9614e408?rik=vJrZCxSgfp8Sqg&riu=http%3a%2f%2f2.bp.blogspot.com%2f-4wH5BWrcuTY%2fUikRfbYHoGI%2fAAAAAAAAAOw%2foHVrOJ6tMlE%2fs1600%2fFoto-reportaje-XXVI-.jpg&ehk=Tk5dg%2fneMiEhCSJ8yruG2sAiKjXrXFystNhJ8C0eJJM%3d&risl=&pid=ImgRaw&r=0" alt="Gastronomía Wayuu">
+                <div class="card-content">
+                    <h3>Gastronomía Ancestral Wayuu</h3>
+                    <p>Aprende a preparar platos tradicionales como el friche (chivo), el mazamorra de maíz y la chicha wayuu, utilizando técnicas y ingredientes auténticos.</p>
+                    <div class="btn-container">
+                        <a href="#gastronomia-chivo" class="btn">Taller de Chivo</a>
+                        <a href="#gastronomia-chicha" class="btn btn-outline">Taller de Chicha</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="https://etniasdelmundo.com/wp-content/uploads/2018/06/wayuu-1.jpg" alt="Historia Wayuu">
+                <div class="card-content">
+                    <h3>Historia y Mitología Wayuu</h3>
+                    <p>Descubre los relatos ancestrales, la importancia de los sueños en su cultura, y el sistema de clanes, narrados por los sabios de la comunidad.</p>
+                    <div class="btn-container">
+                        <a href="#historia-mitos" class="btn">Mitos y Leyendas</a>
+                        <a href="#historia-clanes" class="btn btn-outline">Sistema de Clanes</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="https://img95.699pic.com/photo/32113/7280.jpg_wh860.jpg" alt="Artesanía Wayuu">
+                <div class="card-content">
+                    <h3>Artesanías Wayuu</h3>
+                    <p>Aprende el arte del tejido de mochilas, chinchorros y mantas wayuu, con sus significados simbólicos y técnicas transmitidas por generaciones.</p>
+                    <div class="btn-container">
+                        <a href="#artesania-mochilas" class="btn">Mochilas Wayuu</a>
+                        <a href="#artesania-chinchorros" class="btn btn-outline">Chinchorros</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Páginas específicas de talleres -->
+    <!-- Taller de Chivo Wayuu -->
+    <div id="gastronomia-chivo" class="workshop-page" style="display: none;">
+        <div class="container">
+            <a href="#talleres" class="back-button"><i class="fas fa-arrow-left"></i> Volver a Talleres</a>
+            
+            <div class="experience-header">
+                <h1>Taller de Chivo Wayuu</h1>
+                <p>Aprende a preparar el tradicional Friche, plato ceremonial de la cultura Wayuu</p>
+            </div>
+            
+            <div class="workshop-detail">
+                <img src="https://as1.ftcdn.net/v2/jpg/04/22/87/82/1000_F_422878210_lqEfatTJkKnJ2zRi30YXIvPcF0p5uKjW.jpg" alt="Chivo Wayuu">
+                
+                <div class="workshop-info">
+                    <div class="workshop-info-item">
+                        <i class="fas fa-clock"></i> <strong>Duración:</strong> 4 horas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-user-friends"></i> <strong>Participantes:</strong> 2-8 personas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-money-bill-wave"></i> <strong>Precio:</strong> $120.000 COP
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Ranchería Jepira, La Guajira
+                    </div>
+                </div>
+                
+                <div class="workshop-content">
+                    <h3>Sobre este taller</h3>
+                    <p>El Friche es el plato ceremonial más importante de la cultura Wayuu, preparado tradicionalmente con carne de chivo. En este taller único, aprenderás todo el proceso de preparación, desde el sacrificio ritual hasta las técnicas de cocción tradicionales, guiado por mujeres Wayuu expertas en la cocina ancestral.</p>
+                    
+                    <h3>Lo que aprenderás</h3>
+                    <ul>
+                        <li>El significado cultural del chivo en la sociedad Wayuu</li>
+                        <li>Técnicas tradicionales de preparación y cocción</li>
+                        <li>Los ingredientes autóctonos y su importancia</li>
+                        <li>Los rituales asociados a la preparación de alimentos</li>
+                        <li>Secretos familiares transmitidos por generaciones</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-includes">
+                    <h4>Este taller incluye:</h4>
+                    <ul>
+                        <li>Materiales e ingredientes para la preparación</li>
+                        <li>Degustación de lo preparado</li>
+                        <li>Recetario tradicional en español y wayuunaiki</li>
+                        <li>Certificado de participación</li>
+                        <li>Traducción wayuunaiki-español</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-schedule">
+                    <h4>Itinerario típico:</h4>
+                    <ul>
+                        <li><strong>08:00 am:</strong> Llegada y presentación con los anfitriones</li>
+                        <li><strong>08:30 am:</strong> Explicación cultural y selección del animal</li>
+                        <li><strong>09:30 am:</strong> Preparación tradicional del chivo</li>
+                        <li><strong>11:00 am:</strong> Cocción y preparación de acompañantes</li>
+                        <li><strong>12:00 pm:</strong> Degustación y conversación cultural</li>
+                    </ul>
+                </div>
+                
+                <a href="#contacto" class="btn">Reservar este taller</a>
+            </div>
+        </div>
+    </div>
+    
+     <!-- Taller de Mitos y Leyendas Wayuu -->
+    <div id="historia-mitos" class="workshop-page" style="display: none;">
+        <div class="container">
+            <a href="#talleres" class="back-button"><i class="fas fa-arrow-left"></i> Volver a Talleres</a>
+            
+            <div class="experience-header" >
+                <h1>Mitos y Leyendas Wayuu</h1>
+                <p>Descubre las fascinantes historias ancestrales de la cultura Wayuu</p>
+            </div>
+            
+            <div class="workshop-detail">
+                <img src="https://mitologia.guru/wp-content/uploads/2019/08/mitos-wayuu-696x398.jpg" alt="Mitos Wayuu">
+                
+                <div class="workshop-info">
+                    <div class="workshop-info-item">
+                        <i class="fas fa-clock"></i> <strong>Duración:</strong> 3 horas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-user-friends"></i> <strong>Participantes:</strong> 2-15 personas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-money-bill-wave"></i> <strong>Precio:</strong> $80.000 COP
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Ranchería Uriana, La Guajira
+                    </div>
+                </div>
+                
+                <div class="workshop-content">
+                    <h3>Sobre este taller</h3>
+                    <p>Sumérgete en el mundo mágico de la mitología Wayuu, donde los sueños, los espíritus y los ancestros se entrelazan en relatos fascinantes. Este taller es una oportunidad única para escuchar directamente de los sabios de la comunidad las historias que han moldeado su cosmovisión por generaciones.</p>
+                    
+                    <h3>Lo que experimentarás</h3>
+                    <ul>
+                        <li>El mito de la creación Wayuu: cómo llegó la vida al desierto</li>
+                        <li>Las aventuras de Waleker (la araña tejedora) y sus enseñanzas</li>
+                        <li>Historias sobre Juya (la lluvia) y su importancia vital</li>
+                        <li>Leyendas sobre los primeros Wayuu y su relación con la naturaleza</li>
+                        <li>El significado de los sueños en la cultura Wayuu</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-includes">
+                    <h4>Este taller incluye:</h4>
+                    <ul>
+                        <li>Sesión con sabio tradicional (Palabrero)</li>
+                        <li>Traducción wayuunaiki-español</li>
+                        <li>Material ilustrado con los principales mitos</li>
+                        <li>Ceremonia tradicional de bienvenida</li>
+                        <li>Refrigerio con productos locales</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-schedule">
+                    <h4>Itinerario típico:</h4>
+                    <ul>
+                        <li><strong>04:00 pm:</strong> Ceremonia de bienvenida</li>
+                        <li><strong>04:30 pm:</strong> Introducción a la cosmovisión Wayuu</li>
+                        <li><strong>05:00 pm:</strong> Narración de mitos principales</li>
+                        <li><strong>06:00 pm:</strong> Historias personales del sabio</li>
+                        <li><strong>06:30 pm:</strong> Ronda de preguntas y cierre</li>
+                    </ul>
+                </div>
+                
+                <a href="#contacto" class="btn">Reservar este taller</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taller de Sistema de Clanes Wayuu -->
+    <div id="historia-clanes" class="workshop-page" style="display: none;">
+        <div class="container">
+            <a href="#talleres" class="back-button"><i class="fas fa-arrow-left"></i> Volver a Talleres</a>
+            
+            <div class="experience-header" >
+                <h1>Sistema de Clanes Wayuu</h1>
+                <p>Descubre la compleja estructura social de los Wayuu a través de sus clanes</p>
+            </div>
+            
+            <div class="workshop-detail">
+                <img src="https://64.media.tumblr.com/70b13b7d24389f001f1efb8f8e64c61c/tumblr_noxyijguhE1uo5buuo1_1280.jpg" alt="Clanes Wayuu">
+                
+                <div class="workshop-info">
+                    <div class="workshop-info-item">
+                        <i class="fas fa-clock"></i> <strong>Duración:</strong> 2.5 horas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-user-friends"></i> <strong>Participantes:</strong> 2-12 personas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-money-bill-wave"></i> <strong>Precio:</strong> $75.000 COP
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Ranchería Epieyú, La Guajira
+                    </div>
+                </div>
+                
+                <div class="workshop-content">
+                    <h3>Sobre este taller</h3>
+                    <p>El sistema de clanes es la base de la organización social Wayuu. En este taller interactivo, un palabrero (autoridad tradicional) te guiará a través de los misterios de los clanes, sus relaciones, responsabilidades y el complejo sistema de compensaciones que mantiene la armonía en la sociedad Wayuu.</p>
+                    
+                    <h3>Lo que aprenderás</h3>
+                    <ul>
+                        <li>Los principales clanes Wayuu y sus características</li>
+                        <li>El sistema de apellidos y su importancia</li>
+                        <li>Relaciones interclánicas y matrimoniales</li>
+                        <li>El rol del palabrero en la resolución de conflictos</li>
+                        <li>El sistema de compensaciones (por muertes, ofensas)</li>
+                        <li>Cómo se transmiten las tradiciones por línea materna</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-includes">
+                    <h4>Este taller incluye:</h4>
+                    <ul>
+                        <li>Sesión con palabrero tradicional</li>
+                        <li>Árbol genealógico de clanes Wayuu</li>
+                        <li>Demostración de negociación interclánica</li>
+                        <li>Refrigerio tradicional</li>
+                        <li>Material informativo sobre el sistema de clanes</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-schedule">
+                    <h4>Itinerario típico:</h4>
+                    <ul>
+                        <li><strong>03:00 pm:</strong> Introducción a la sociedad Wayuu</li>
+                        <li><strong>03:30 pm:</strong> Explicación del sistema de clanes</li>
+                        <li><strong>04:15 pm:</strong> Demostración de resolución de conflicto</li>
+                        <li><strong>05:00 pm:</strong> Historias de alianzas clánicas</li>
+                        <li><strong>05:30 pm:</strong> Ronda de preguntas y cierre</li>
+                    </ul>
+                </div>
+              
+                <a href="#contacto" class="btn">Reservar este taller</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taller de Chinchorros Wayuu -->
+    <div id="artesania-chinchorros" class="workshop-page" style="display: none;">
+        <div class="container">
+            <a href="#talleres" class="back-button"><i class="fas fa-arrow-left"></i> Volver a Talleres</a>
+            
+            <div class="experience-header">
+                <h1>Taller de Chinchorros Wayuu</h1>
+                <p>Aprende el arte ancestral del tejido de chinchorros tradicionales</p>
+            </div>
+            
+            <div class="workshop-detail">
+                <img src="https://chinchorros.es/wp-content/uploads/2023/12/chinchorro-wayuu-768x512.jpg" alt="Chinchorros Wayuu">
+                
+                <div class="workshop-info">
+                    <div class="workshop-info-item">
+                        <i class="fas fa-clock"></i> <strong>Duración:</strong> 6 horas (2 días)
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-user-friends"></i> <strong>Participantes:</strong> 2-5 personas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-money-bill-wave"></i> <strong>Precio:</strong> $200.000 COP
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Ranchería Pushaina, La Guajira
+                    </div>
+                </div>
+                
+                <div class="workshop-content">
+                    <h3>Sobre este taller</h3>
+                    <p>El chinchorro es mucho más que una hamaca para los Wayuu: es una cuna, una cama, un refugio y una herencia familiar. En este taller intensivo de dos días, aprenderás las técnicas básicas del tejido de chinchorros tradicionales, guiado por maestras artesanas que han dominado este arte por décadas.</p>
+                    
+                    <h3>Lo que aprenderás</h3>
+                    <ul>
+                        <li>Historia y significado cultural del chinchorro</li>
+                        <li>Selección y preparación de materiales tradicionales</li>
+                        <li>Técnicas básicas de tejido para chinchorros</li>
+                        <li>Diseños tradicionales y su significado</li>
+                        <li>Cuidado y mantenimiento de chinchorros</li>
+                        <li>Iniciarás tu propio chinchorro pequeño</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-includes">
+                    <h4>Este taller incluye:</h4>
+                    <ul>
+                        <li>Materiales para el taller (hilos, agujas, base)</li>
+                        <li>Kit de iniciación para continuar tejiendo</li>
+                        <li>Guía ilustrada de puntos básicos</li>
+                        <li>Certificado de participación</li>
+                        <li>Demostración de tejido avanzado</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-schedule">
+                    <h4>Itinerario típico:</h4>
+                    <p><strong>Día 1:</strong></p>
+                    <ul>
+                        <li><strong>09:00 am:</strong> Introducción cultural</li>
+                        <li><strong>10:00 am:</strong> Selección de materiales y diseño</li>
+                        <li><strong>11:00 am:</strong> Aprendizaje de puntos básicos</li>
+                        <li><strong>02:00 pm:</strong> Inicio de tu chinchorro</li>
+                    </ul>
+                    <p><strong>Día 2:</strong></p>
+                    <ul>
+                        <li><strong>09:00 am:</strong> Continuación del tejido</li>
+                        <li><strong>11:00 am:</strong> Técnicas de terminación</li>
+                        <li><strong>01:00 pm:</strong> Demostración de tejido avanzado</li>
+                        <li><strong>03:00 pm:</strong> Presentación de trabajos y cierre</li>
+                    </ul>
+                </div>
+               
+                <a href="#contacto" class="btn">Reservar este taller</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taller de Chicha Wayuu -->
+    <div id="gastronomia-chicha" class="workshop-page" style="display: none;">
+        <div class="container">
+            <a href="#talleres" class="back-button"><i class="fas fa-arrow-left"></i> Volver a Talleres</a>
+            
+            <div class="experience-header">
+                <h1>Taller de Chicha Wayuu</h1>
+                <p>Aprende el arte ancestral de preparar esta bebida tradicional de maíz</p>
+            </div>
+            
+            <div class="workshop-detail">
+                <img src="https://boquisabroso.com.co/wp-content/uploads/2023/02/Receta-de-Chicha-de-Maiz.jpg" alt="Chicha Wayuu">
+                
+                <div class="workshop-info">
+                    <div class="workshop-info-item">
+                        <i class="fas fa-clock"></i> <strong>Duración:</strong> 3 horas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-user-friends"></i> <strong>Participantes:</strong> 2-10 personas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-money-bill-wave"></i> <strong>Precio:</strong> $90.000 COP
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Ranchería Wepia, La Guajira
+                    </div>
+                </div>
+                
+                <div class="workshop-content">
+                    <h3>Sobre este taller</h3>
+                    <p>La chicha de maíz es una bebida ancestral de la cultura Wayuu con un profundo significado ceremonial. En este taller, aprenderás el proceso completo de elaboración, desde la selección del maíz hasta las técnicas de fermentación tradicional, guiado por mujeres Wayuu expertas en esta preparación milenaria.</p>
+                    
+                    <h3>Lo que aprenderás</h3>
+                    <ul>
+                        <li>Los tipos de maíz utilizados y su significado</li>
+                        <li>El proceso de germinación y malteado</li>
+                        <li>Técnicas de cocción y fermentación tradicional</li>
+                        <li>El papel ceremonial de la chicha en la cultura Wayuu</li>
+                        <li>Variaciones regionales de la preparación</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-includes">
+                    <h4>Este taller incluye:</h4>
+                    <ul>
+                        <li>Materiales e ingredientes para la preparación</li>
+                        <li>Degustación de chicha tradicional</li>
+                        <li>Guía de preparación bilingüe</li>
+                        <li>Muestra de chicha para llevar</li>
+                        <li>Certificado de participación</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-schedule">
+                    <h4>Itinerario típico:</h4>
+                    <ul>
+                        <li><strong>09:00 am:</strong> Introducción cultural</li>
+                        <li><strong>09:30 am:</strong> Selección y preparación del maíz</li>
+                        <li><strong>10:30 am:</strong> Proceso de cocción</li>
+                        <li><strong>11:30 am:</strong> Técnicas de fermentación</li>
+                        <li><strong>12:00 pm:</strong> Degustación y cierre ceremonial</li>
+                    </ul>
+                </div>
+                     
+                <a href="#contacto" class="btn">Reservar este taller</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taller de Mochilas Wayuu -->
+    <div id="artesania-mochilas" class="workshop-page" style="display: none;">
+        <div class="container">
+            <a href="#talleres" class="back-button"><i class="fas fa-arrow-left"></i> Volver a Talleres</a>
+            
+            <div class="experience-header" >
+                <h1>Taller de Mochilas Wayuu</h1>
+                <p>Aprende el arte del tejido tradicional de las famosas mochilas Wayuu</p>
+            </div>
+            
+            <div class="workshop-detail">
+                <img src="https://th.bing.com/th/id/OIP.vY16vhxmcldOTIXESKF3LQHaEK?cb=iwp2&rs=1&pid=ImgDetMain" alt="Mochilas Wayuu">
+                
+                <div class="workshop-info">
+                    <div class="workshop-info-item">
+                        <i class="fas fa-clock"></i> <strong>Duración:</strong> 8 horas (2 días)
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-user-friends"></i> <strong>Participantes:</strong> 2-6 personas
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-money-bill-wave"></i> <strong>Precio:</strong> $250.000 COP
+                    </div>
+                    <div class="workshop-info-item">
+                        <i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> Ranchería Jalaala, La Guajira
+                    </div>
+                </div>
+                
+                <div class="workshop-content">
+                    <h3>Sobre este taller</h3>
+                    <p>Las mochilas Wayuu son reconocidas mundialmente por su belleza y complejidad. En este taller intensivo de dos días, aprenderás las técnicas básicas del tejido wayuu, los significados de los diseños y colores, y comenzarás tu propia mochila bajo la guía de maestras artesanas de la comunidad.</p>
+                    
+                    <h3>Lo que aprenderás</h3>
+                    <ul>
+                        <li>Historia y significado cultural de las mochilas</li>
+                        <li>Técnicas básicas de tejido wayuu</li>
+                        <li>Significado de los diseños y colores tradicionales</li>
+                        <li>Selección y preparación de materiales</li>
+                        <li>Iniciación de tu propia mochila</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-includes">
+                    <h4>Este taller incluye:</h4>
+                    <ul>
+                        <li>Materiales para el taller (hilos, agujas, base)</li>
+                        <li>Kit de iniciación para continuar tejiendo</li>
+                        <li>Guía ilustrada de puntos básicos</li>
+                        <li>Certificado de participación</li>
+                        <li>Traducción wayuunaiki-español</li>
+                    </ul>
+                </div>
+                
+                <div class="workshop-schedule">
+                    <h4>Itinerario típico:</h4>
+                    <p><strong>Día 1:</strong></p>
+                    <ul>
+                        <li><strong>09:00 am:</strong> Introducción cultural</li>
+                        <li><strong>10:00 am:</strong> Selección de colores y materiales</li>
+                        <li><strong>11:00 am:</strong> Aprendizaje de puntos básicos</li>
+                        <li><strong>02:00 pm:</strong> Inicio de tu mochila</li>
+                    </ul>
+                    <p><strong>Día 2:</strong></p>
+                    <ul>
+                        <li><strong>09:00 am:</strong> Continuación del tejido</li>
+                        <li><strong>11:00 am:</strong> Técnicas de cierre y acabados</li>
+                        <li><strong>01:00 pm:</strong> Presentación de trabajos y cierre</li>
+                    </ul>
+                </div>
+                
+                <a href="#contacto" class="btn">Reservar este taller</a>
+            </div>
+        </div>
+    </div>
+
+     <!-- Script para manejar la navegación entre talleres -->
+    <script>
+        // Función para mostrar una página específica de taller
+        function showWorkshopPage(pageId) {
+            // Ocultar todas las páginas de talleres
+            document.querySelectorAll('.workshop-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Mostrar la página solicitada
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        // Manejar clicks en los botones de talleres
+        document.querySelectorAll('[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#gastronomia-') || href.startsWith('#artesania-') || href.startsWith('#historia-')) {
+                    e.preventDefault();
+                    showWorkshopPage(href.substring(1));
+                }
+            });
+        });
+        
+        // Mostrar la página principal al cargar
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            if (hash && (hash.startsWith('#gastronomia-') || hash.startsWith('#artesania-') || hash.startsWith('#historia-'))) {
+                showWorkshopPage(hash.substring(1));
+            }
+        });
+    </script>
+
+    <section id="turismo" class="turismo-section">
+    <div class="container">
+        <h2>Turismo Cultural Wayuu</h2>
+        <p class="section-subtitle">Vive experiencias auténticas que conectan con el corazón de la cultura Wayuu</p>
+        
+        <div class="turismo-tabs">
+            <button class="tab-btn active" data-tab="inmersion">Inmersión Cultural</button>
+            <button class="tab-btn" data-tab="rutas">Rutas Tradicionales</button>
+            <button class="tab-btn" data-tab="alojamiento">Alojamiento</button>
+        </div>
+        
+        <div class="turismo-content">
+            <!-- Inmersión Cultural -->
+            <div id="inmersion" class="tab-pane active">
+                <div class="turismo-card">
+                    <div class="turismo-img">
+                        <img src="https://th.bing.com/th/id/R.13f3384da42a46a794a2a9a1da28df27?rik=J%2bOovE0Q6ZpskQ&pid=ImgRaw&r=0" alt="Inmersión Wayuu">
+                    </div>
+                    <div class="turismo-details">
+                        <h3>Vive con una Familia Wayuu</h3>
+                        <p class="turismo-desc">Experimenta la vida cotidiana en una ranchería Wayuu, participando en sus actividades tradicionales y conociendo su forma de vida.</p>
+                        
+                        <div class="turismo-highlights">
+                            <h4>Lo que incluye:</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> 2 noches de alojamiento en ranchería</li>
+                                <li><i class="fas fa-check-circle"></i> Participación en actividades diarias</li>
+                                <li><i class="fas fa-check-circle"></i> Taller de artesanía básica</li>
+                                <li><i class="fas fa-check-circle"></i> Comidas tradicionales</li>
+                                <li><i class="fas fa-check-circle"></i> Guía local bilingüe</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="turismo-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Duración: 3 días / 2 noches</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users"></i>
+                                <span>Grupos de 2-6 personas</span>
+                            </div>
+                            <div class="meta-item price">
+                                <i class="fas fa-tag"></i>
+                                <span>$450.000 COP por persona</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#contacto" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rutas Tradicionales -->
+            <div id="rutas" class="tab-pane">
+                <div class="turismo-card">
+                    <div class="turismo-img">
+                        <img src="https://i.ytimg.com/vi/W36GohHgIDI/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-DoACuAiKAgwIABABGGUgUyhOMA8=&rs=AOn4CLAZowv-06r9OTIWlogOfvndCDHZrA" alt="Rutas Wayuu">
+                    </div>
+                    <div class="turismo-details">
+                        <h3>Ruta de los Saberes Ancestrales</h3>
+                        <p class="turismo-desc">Recorrido guiado por lugares sagrados y centros culturales Wayuu, conociendo su historia, mitología y tradiciones.</p>
+                        
+                        <div class="turismo-highlights">
+                            <h4>Puntos destacados:</h4>
+                            <ul>
+                                <li><i class="fas fa-map-marker-alt"></i> Santuario de Waleker (la araña tejedora)</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Centro de artesanías tradicionales</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Sitio ceremonial de Juya (la lluvia)</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Taller con palabrero tradicional</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Demostración de danzas Wayuu</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="turismo-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Duración: 1 día completo (8 horas)</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users"></i>
+                                <span>Grupos de 4-12 personas</span>
+                            </div>
+                            <div class="meta-item price">
+                                <i class="fas fa-tag"></i>
+                                <span>$180.000 COP por persona</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#contacto" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Alojamiento -->
+            <div id="alojamiento" class="tab-pane">
+                <div class="alojamiento-grid">
+                    <div class="alojamiento-card">
+                        <img src="https://adventure.com/wp-content/uploads/2023/08/Guajiara-peninsula-Rooms-Hospedaje-Luzmila-scaled.jpg" alt="Eco-Albergue">
+                        <div class="alojamiento-info">
+                            <h3>Eco-Albergue Tradicional</h3>
+                            <p>Alojamiento en construcciones tradicionales con todas las comodidades básicas, ubicado en el corazón de una ranchería Wayuu.</p>
+                            <div class="alojamiento-price">
+                                <span>$120.000 COP</span>
+                                <small>por noche (incluye desayuno)</small>
+                            </div>
+                            <a href="#contacto" class="btn-outline">Más información</a>
+                        </div>
+                    </div>
+                    
+                    <div class="alojamiento-card">
+                        <img src="https://www.tomplanmytrip.com/wp-content/uploads/2023/05/Wayuu-Rancheria-768x576.jpg" alt="Casa de Familia">
+                        <div class="alojamiento-info">
+                            <h3>Hospedaje en Casa de Familia</h3>
+                            <p>Experimenta la auténtica vida Wayuu alojándote con una familia local y participando en sus actividades cotidianas.</p>
+                            <div class="alojamiento-price">
+                                <span>$90.000 COP</span>
+                                <small>por noche (incluye cena)</small>
+                            </div>
+                            <a href="#contacto" class="btn-outline">Más información</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    // Funcionalidad de las pestañas de turismo
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remover clase active de todos los botones
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            // Añadir clase active al botón clickeado
+            this.classList.add('active');
+            
+            // Ocultar todos los paneles
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            // Mostrar el panel correspondiente
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+</script>
+<!-- Sección de Experiencias de Viaje -->
+<section id="experiencias" class="reviews-section">
+    <div class="container">
+        <h2>Experiencias de Viaje</h2>
+        <p class="section-subtitle">
+            Estas son algunas reseñas de personas que ya vivieron la experiencia Wayuu con nosotros.
+        </p>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">LM</div>
+                    <div class="review-name-role">
+                        <span class="review-name">Laura Méndez</span>
+                        <span class="review-tag">Inmersión con familia Wayuu · Bogotá</span>
+                    </div>
+                </div>
+                <p class="review-text">
+                    “Pasar dos noches en la ranchería fue increíble. Compartimos las comidas,
+                    ayudamos en las tareas diarias y escuchamos muchas historias de la comunidad.
+                    Me sentí cuidada todo el tiempo.”
+                </p>
+                <p class="review-meta">
+                    <i class="fas fa-star"></i> Calificación: 5/5 · Viajó en junio de 2025
+                </p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">AV</div>
+                    <div class="review-name-role">
+                        <span class="review-name">Andrés y Valentina</span>
+                        <span class="review-tag">Ruta de Saberes Ancestrales · Medellín</span>
+                    </div>
+                </div>
+                <p class="review-text">
+                    “La ruta de los saberes nos ayudó a entender mejor la historia y la
+                    espiritualidad Wayuu. Lo que más nos gustó fue el espacio con el palabrero
+                    y las danzas al final del recorrido.”
+                </p>
+                <p class="review-meta">
+                    <i class="fas fa-star"></i> Calificación: 4.8/5 · Viajaron en abril de 2025
+                </p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">CR</div>
+                    <div class="review-name-role">
+                        <span class="review-name">Carolina Rojas</span>
+                        <span class="review-tag">Eco-albergue tradicional · Barranquilla</span>
+                    </div>
+                </div>
+                <p class="review-text">
+                    “El eco-albergue es sencillo pero muy cómodo. Despertar con el amanecer
+                    en el desierto y ver a las artesanas tejiendo fue lo que más me marcó.
+                    Sin duda volvería.”
+                </p>
+                <p class="review-meta">
+                    <i class="fas fa-star"></i> Calificación: 5/5 · Viajó en enero de 2025
+                </p>
+            </div>
+        </div>
+
+        <!-- Widget de calificación simple -->
+        <div class="rating-widget">
+            <h3>Califica tu experiencia con Raíces Vivas</h3>
+            <p>¿Cómo te pareció el servicio en general?</p>
+
+            <div class="rating-buttons">
+                <button type="button" id="rating-like" class="rating-btn like" title="Sí me gustó">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button type="button" id="rating-dislike" class="rating-btn dislike" title="No me gustó">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button type="button" id="rating-why" class="rating-btn why" title="Cuéntanos por qué">
+                    <i class="fas fa-question"></i>
+                </button>
+            </div>
+
+            <div id="rating-message" class="rating-message">
+                Elige una opción para calificar tu experiencia.
+            </div>
+
+            <div id="rating-comment-group" class="rating-comment-group">
+    <label id="rating-comment-label" for="rating-comment">
+        Cuéntanos cómo fue tu experiencia:
+    </label>
+    <textarea id="rating-comment" placeholder="Escribe aquí por qué te gustó o qué podemos mejorar..."></textarea>
+
+    <button type="button" id="rating-send-btn" class="submit-rating-btn">
+        Enviar comentario
+        <i class="fas fa-paper-plane"></i>
+    </button>
+</div>
+
+    </button>
+    </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Sección de Artesanías Wayuu -->
+<section id="artesanias" class="crafts-section">
+    <div class="container">
+        <h2>Artesanías Wayuu</h2>
+        <p class="section-subtitle">Cada pieza es una obra de arte tejida con historias y tradiciones ancestrales</p>
+        
+        <div class="crafts-tabs">
+            <button class="tab-btn active" data-tab="mochilas">Mochilas</button>
+            <button class="tab-btn" data-tab="chinchorros">Chinchorros</button>
+            <button class="tab-btn" data-tab="accesorios">Accesorios</button>
+        </div>
+        
+        <!-- Contenido de Mochilas -->
+        <div id="mochilas" class="tab-content active">
+            <div class="crafts-gallery">
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://maittaa.com/wp-content/uploads/2024/03/mochila-susu-3.jpg" alt="Mochila Wayuu tradicional">
+                        <div class="craft-overlay">
+                            <h3>Mochila Susu</h3>
+                            <p>Tejida a mano con lana virgen, diseño tradicional</p>
+                            <span class="craft-price">$180.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Mochila Susu</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Carmen Pushaina</span>
+                            <span><i class="fas fa-clock"></i> 20 días de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://i.etsystatic.com/11073399/r/il/b437eb/3086751719/il_fullxfull.3086751719_ka8h.jpg" alt="Mochila Wayuu mediana">
+                        <div class="craft-overlay">
+                            <h3>Mochila Ainruju</h3>
+                            <p>Diseño geométrico, colores vibrantes</p>
+                            <span class="craft-price">$150.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Mochila Ainruju</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Luisa Epieyú</span>
+                            <span><i class="fas fa-clock"></i> 15 días de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://th.bing.com/th/id/OIP.3TGlKfjTViHyA4AJM4ke2wHaFj?cb=iwp2&rs=1&pid=ImgDetMain" alt="Mochila Wayuu pequeña">
+                        <div class="craft-overlay">
+                            <h3>Mochila Kattoui</h3>
+                            <p>Versión mini, perfecta para accesorios</p>
+                            <span class="craft-price">$120.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Mochila Kattoui</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Rosa Uriana</span>
+                            <span><i class="fas fa-clock"></i> 10 días de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="crafts-description">
+                <h3><i class="fas fa-hands-helping"></i> El Arte de las Mochilas Wayuu</h3>
+                <p>Las mochilas Wayuu o "Susu" son símbolos de identidad cultural. Cada diseño y color tiene un significado especial en la cosmogonía Wayuu. Las mujeres aprenden el arte del tejido desde niñas, y cada pieza puede tardar entre 10 y 30 días en completarse, dependiendo de su complejidad.</p>
+                <a href="#contacto" class="btn">¿Quieres una mochila personalizada?</a>
+            </div>
+        </div>
+        
+        <!-- Contenido de Chinchorros -->
+        <div id="chinchorros" class="tab-content">
+            <div class="crafts-gallery">
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://cloudfront-us-east-1.images.arcpublishing.com/semana/63BNU63TXRFRPL5UIC4JKUWYOQ.jpg" alt="Chinchorro tradicional">
+                        <div class="craft-overlay">
+                            <h3>Chinchorro Wale'kerü</h3>
+                            <p>Tejido tradicional con algodón natural</p>
+                            <span class="craft-price">$350.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Chinchorro Wale'kerü</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Marta Jusayú</span>
+                            <span><i class="fas fa-clock"></i> 2 meses de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://th.bing.com/th/id/OIP.qrMWyLAyOdnvKdl9HOgTnwHaHa?cb=iwp2&rs=1&pid=ImgDetMain" alt="Chinchorro doble">
+                        <div class="craft-overlay">
+                            <h3>Chinchorro Jamüchi</h3>
+                            <p>Versión doble tejida, extra resistente</p>
+                            <span class="craft-price">$450.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Chinchorro Jamüchi</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesano: José Pushaina</span>
+                            <span><i class="fas fa-clock"></i> 3 meses de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://www.pngarts.com/files/18/Hammock-PNG-Image.png" alt="Chinchorro infantil">
+                        <div class="craft-overlay">
+                            <h3>Chinchorro Uuchí</h3>
+                            <p>Versión infantil, perfecta para regalo</p>
+                            <span class="craft-price">$200.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Chinchorro Uuchí</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Dolores Ipuana</span>
+                            <span><i class="fas fa-clock"></i> 1 mes de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="crafts-description">
+                <h3><i class="fas fa-bed"></i> Chinchorros: Cama y Herencia Wayuu</h3>
+                <p>Los chinchorros Wayuu son mucho más que hamacas: representan seguridad, descanso y herencia familiar. Cada chinchorro se teje con técnicas ancestrales que garantizan su resistencia y durabilidad, pudiendo durar generaciones. Los diseños más complejos pueden incluir hasta 15 colores diferentes.</p>
+                <a href="#contacto" class="btn">Encarga tu chinchorro personalizado</a>
+            </div>
+        </div>
+        
+        <!-- Contenido de Accesorios -->
+        <div id="accesorios" class="tab-content">
+            <div class="crafts-gallery">
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://i.pinimg.com/originals/5d/bf/c3/5dbfc3c976971ae418144803f1a70115.jpg" alt="Manillas Wayuu">
+                        <div class="craft-overlay">
+                            <h3>Manillas Kasa</h3>
+                            <p>Juego de 5 manillas tejidas</p>
+                            <span class="craft-price">$80.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Manillas Kasa</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Ana Uriana</span>
+                            <span><i class="fas fa-clock"></i> 3 días de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://bolsosymochilaswayuu.com/wp-content/uploads/2021/03/Collar-Wayuu-Maya-Colombia-Cali-Medellin-Bogota-Cartagena-Barranquilla-y-Pasto-Italia-Espana-Estados-Unidos-Europa.jpg" alt="Collares Wayuu">
+                        <div class="craft-overlay">
+                            <h3>Collar Wüin</h3>
+                            <p>Con diseños tradicionales</p>
+                            <span class="craft-price">$95.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Collar Wüin</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Teresa Jusayú</span>
+                            <span><i class="fas fa-clock"></i> 5 días de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="craft-item">
+                    <div class="craft-img-container">
+                        <img src="https://i.pinimg.com/originals/e0/8b/67/e08b6705419c47417952f696888830b8.jpg" alt="Bolso Wayuu">
+                        <div class="craft-overlay">
+                            <h3>Bolso Pütchi</h3>
+                            <p>Bolso mediano con flecos</p>
+                            <span class="craft-price">$130.000 COP</span>
+                            <a href="#contacto" class="craft-btn">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="craft-info">
+                        <h3>Bolso Pütchi</h3>
+                        <div class="craft-meta">
+                            <span><i class="fas fa-user"></i> Artesana: Carmen Epinayú</span>
+                            <span><i class="fas fa-clock"></i> 8 días de trabajo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="crafts-description">
+                <h3><i class="fas fa-tshirt"></i> Accesorios con Identidad Cultural</h3>
+                <p>Los accesorios Wayuu permiten llevar contigo un pedazo de esta cultura ancestral. Cada pieza, aunque pequeña, contiene la misma dedicación y significado que las grandes obras. Son perfectos como regalos o para complementar tu estilo con un toque étnico y auténtico.</p>
+                <a href="#contacto" class="btn">Ver más accesorios disponibles</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Funcionalidad de las pestañas
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remover clase active de todos los botones y contenidos
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            // Agregar clase active al botón clickeado
+            this.classList.add('active');
+            
+            // Mostrar el contenido correspondiente
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+</script>
+   
+        <section id="custom-plan">
+            <div class="custom-plan">
+                <h3>¿No encuentras lo que buscas? ¡Crea tu plan personalizado!</h3>
+                <p>Combina diferentes experiencias y crea el viaje cultural perfecto a tu medida. Nuestros asesores Wayuu te ayudarán a diseñar una experiencia única.</p>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Elige tus intereses</h4>
+                        <p>Selecciona entre gastronomía, artesanías, historia, naturaleza o combinaciones.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Define tu duración</h4>
+                        <p>Desde medio día hasta una semana completa de inmersión cultural.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Personaliza detalles</h4>
+                        <p>Alojamiento, comidas, actividades específicas y presupuesto.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Recibe tu propuesta</h4>
+                        <p>Te enviaremos un itinerario detallado con todas las experiencias seleccionadas.</p>
+                    </div>
+                </div>
+                
+                <a href="#contacto" class="btn">Diseña tu experiencia</a>
+            </div>
+        </section>
+        
+        <section id="impacto">
+            <h2>Nuestro Impacto en la Comunidad Wayuu</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Ingresos Directos</h3>
+                    <p>70%-90% del pago por talleres y artesanías va directamente a las familias Wayuu participantes.</p>
+                </div>
+                
+                <div class="impact-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Educación</h3>
+                    <p>5% de cada venta se destina a becas escolares para niños Wayuu.</p>
+                </div>
+                
+                <div class="impact-item">
+                    <i class="fas fa-faucet"></i>
+                    <h3>Agua Potable</h3>
+                    <p>Hemos instalado 12 sistemas de filtrado de agua en rancherías participantes.</p>
+                </div>
+                
+                <div class="impact-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Empoderamiento</h3>
+                    <p>35 mujeres Wayuu han creado sus propios negocios gracias al proyecto.</p>
+                </div>
+                
+                                <div class="impact-item">
+                    <i class="fas fa-language"></i>
+                    <h3>Preservación Cultural</h3>
+                    <p>Documentación de 15 tradiciones orales que estaban en riesgo de desaparecer.</p>
+                </div>
+                
+                <div class="impact-item">
+                    <i class="fas fa-solar-panel"></i>
+                    <h3>Energía Solar</h3>
+                    <p>Instalación de paneles solares en 8 rancherías para iluminación básica.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contacto" class="contact-section">
+    <div class="container">
+        <h2>Reserva tu Experiencia Wayuu</h2>
+        <p class="section-subtitle">Completa el formulario y un guía cultural se pondrá en contacto contigo para organizar tu visita</p>
+        
+        <div class="contact-container">
+            <!-- Formulario de Contacto -->
+            <div class="contact-form">
+                <form id="reservationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Ej: María González">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required placeholder="Ej: ejemplo@correo.com">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: +57 300 1234567">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="personas">Número de personas</label>
+                            <input type="number" id="personas" name="personas" min="1" max="20" placeholder="Ej: 2">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interes">¿Qué experiencia te interesa?</label>
+                        <select id="interes" name="interes">
+                            <option value="">Selecciona una opción</option>
+                            <option value="gastronomia">Taller de Gastronomía Wayuu</option>
+                            <option value="artesania">Taller de Artesanías Wayuu</option>
+                            <option value="historia">Recorrido Histórico-Cultural</option>
+                            <option value="inmersion">Inmersión con Familia Wayuu</option>
+                            <option value="personalizado">Experiencia Personalizada</option>
+                        </select>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha">Fecha tentativa</label>
+                            <input type="date" id="fecha" name="fecha">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hora">Hora preferida</label>
+                            <select id="hora" name="hora">
+                                <option value="">Cualquier hora</option>
+                                <option value="08:00">8:00 am</option>
+                                <option value="09:00">9:00 am</option>
+                                <option value="10:00">10:00 am</option>
+                                <option value="14:00">2:00 pm</option>
+                                <option value="15:00">3:00 pm</option>
+                            </select>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje adicional</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos más sobre lo que esperas de esta experiencia..."></textarea>
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span>Enviar solicitud</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Información de Contacto -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visítanos</h3>
+                    <p>Ranchería Jalaala, La Guajira, Colombia</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Llámanos</h3>
+                    <p>+57 321 987 6543</p>
+                    <p>Lunes a Viernes: 8am - 6pm</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Escríbenos</h3>
+                    <p>info@raicesvivaswayuu.com</p>
+                    <p>reservas@raicesvivaswayuu.com</p>
+                </div>
+                
+                <div class="social-media">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script>
+    // Validación básica del formulario
+    document.getElementById('reservationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validar campos requeridos
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        
+        if (!nombre || !email) {
+            alert('Por favor completa los campos requeridos');
+            return;
+        }
+        
+        // Simular envío del formulario
+        alert('¡Gracias por tu solicitud! Un asesor Wayuu se pondrá en contacto contigo pronto.');
+        this.reset();
+    });
+</script>
+    
+    <footer>   
+        <div class="copyright">
+            <p>&copy; 2023 Raíces Vivas - Cultura Wayuu. Todos los derechos reservados.</p>
+            <p>Desarrollado con ❤️ para preservar las tradiciones ancestrales</p>
+        </div>
+    </footer>
+
+    <!-- Páginas específicas de experiencias (simuladas para el ejemplo) -->
+    <!-- Gastronomía Wayuu -->
+    <div id="gastronomia-wayuu" style="display: none;">
+        <div class="experience-header" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <h1>Gastronomía Ancestral Wayuu</h1>
+            <p>Descubre los sabores auténticos de la cultura Wayuu a través de talleres prácticos dirigidos por mujeres de la comunidad.</p>
+        </div>
+        
+        <div class="container">
+            <h2>Talleres Gastronómicos Disponibles</h2>
+            <p>Elige entre nuestras experiencias culinarias y aprende los secretos de la cocina tradicional Wayuu:</p>
+            
+            <div class="plans-container">
+                <div class="plan-card">
+                    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Taller de Chivo">
+                    <div class="plan-content">
+                        <span class="plan-duration">4 horas</span>
+                        <h3>El Arte del Friche (Chivo)</h3>
+                        <p>Aprende a preparar el plato más representativo de la gastronomía Wayuu, desde el sacrificio ritual hasta la cocción tradicional.</p>
+                        <div class="plan-price">$120.000 COP</div>
+                        <ul class="plan-features">
+                            <li>Introducción a la importancia cultural</li>
+                            <li>Preparación completa del plato</li>
+                            <li>Degustación de lo preparado</li>
+                            <li>Recetario tradicional</li>
+                            <li>Certificado de participación</li>
+                        </ul>
+                        <a href="#contacto" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+                
+                <div class="plan-card">
+                    <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Taller de Chicha">
+                    <div class="plan-content">
+                        <span class="plan-duration">3 horas</span>
+                        <h3>Elaboración de Chicha Wayuu</h3>
+                        <p>Descubre el proceso completo de esta bebida ancestral, desde la selección del maíz hasta la fermentación tradicional.</p>
+                        <div class="plan-price">$90.000 COP</div>
+                        <ul class="plan-features">
+                            <li>Historia y significado ceremonial</li>
+                            <li>Proceso completo de elaboración</li>
+                            <li>Técnicas de fermentación</li>
+                            <li>Degustación guiada</li>
+                        </ul>
+                        <a href="#contacto" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+                
+                <div class="plan-card">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Comida Tradicional">
+                    <div class="plan-content">
+                        <span class="plan-duration">5 horas</span>
+                        <h3>Menú Tradicional Completo</h3>
+                        <p>Taller intensivo donde aprenderás a preparar un menú completo wayuu: arepas de maíz, quesos, carnes y postres tradicionales.</p>
+                        <div class="plan-price">$180.000 COP</div>
+                        <ul class="plan-features">
+                            <li>4 platos tradicionales</li>
+                            <li>Técnicas de cocción al aire libre</li>
+                            <li>Uso de utensilios tradicionales</li>
+                            <li>Comida completa incluida</li>
+                            <li>Diploma de participación</li>
+                        </ul>
+                        <a href="#contacto" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonials">
+                <h2>Experiencias Gastronómicas Reales</h2>
+                <div class="testimonial">
+                    <p>"Participar en el taller de chivo wayuu fue una experiencia que cambió mi perspectiva sobre la alimentación. No solo aprendí a cocinar, sino el profundo respeto que esta cultura tiene por los animales y la naturaleza. La abuela Juana, nuestra instructora, nos contó historias fascinantes mientras cocinábamos."</p>
+                    <p class="testimonial-author">- Carlos Andrés Rodríguez, Medellín</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Script para el modal de asesoría
+        const modal = document.getElementById("consultantModal");
+        const btn = document.getElementById("consultantBtn");
+        const span = document.getElementsByClassName("close-modal")[0];
+        
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // Smooth scrolling para los enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Simulación de navegación a páginas específicas
+        document.querySelectorAll('[href*="wayuu.html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('href').replace('.html', '');
+                alert(`En un sitio real, esto cargaría la página específica para: ${pageId.replace('-', ' ')}`);
+                // En implementación real, aquí iría window.location.href = this.getAttribute('href');
+            });
+        });
+    </script>
+    <script>
+    // --- Lógica para el widget de calificación ---
+    const likeBtn = document.getElementById('rating-like');
+    const dislikeBtn = document.getElementById('rating-dislike');
+    const whyBtn = document.getElementById('rating-why');
+    const ratingMessage = document.getElementById('rating-message');
+    const commentGroup = document.getElementById('rating-comment-group');
+    const commentLabel = document.getElementById('rating-comment-label');
+    const sendBtn = document.getElementById('rating-send-btn');
+    const commentTextarea = document.getElementById('rating-comment');
+
+    let lastRating = null; // 'like' o 'dislike'
+
+    if (likeBtn && dislikeBtn && whyBtn && sendBtn && commentTextarea) {
+        // Botón de "Sí me gustó"
+        likeBtn.addEventListener('click', function () {
+            likeBtn.classList.add('active');
+            dislikeBtn.classList.remove('active');
+
+            lastRating = 'like';
+            ratingMessage.textContent = '¡Gracias! Nos alegra que hayas disfrutado tu experiencia.';
+            commentGroup.style.display = 'none'; // Ocultamos el cuadro de comentario
+        });
+
+        // Botón de "No me gustó"
+        dislikeBtn.addEventListener('click', function () {
+            dislikeBtn.classList.add('active');
+            likeBtn.classList.remove('active');
+
+            lastRating = 'dislike';
+            ratingMessage.textContent = 'Gracias por tu sinceridad. Queremos mejorar a partir de tus comentarios.';
+            commentGroup.style.display = 'none';
+        });
+
+        // Botón de signo de interrogación (?)
+        whyBtn.addEventListener('click', function () {
+            // Mostramos el cuadro de comentario
+            commentGroup.style.display = 'block';
+
+            if (lastRating === 'like') {
+                commentLabel.textContent = 'Cuéntanos qué fue lo que más te gustó de tu experiencia:';
+            } else if (lastRating === 'dislike') {
+                commentLabel.textContent = 'Cuéntanos qué no te gustó o qué podríamos mejorar:';
+            } else {
+                commentLabel.textContent = 'Cuéntanos cómo fue tu experiencia:';
+            }
+
+            commentGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // Botón que "simula" enviar la recomendación
+        sendBtn.addEventListener('click', function () {
+            const texto = commentTextarea.value.trim();
+
+            if (!texto) {
+                alert('Por favor escribe tu comentario antes de enviarlo.');
+                return;
+            }
+
+            // Simulación de envío
+            alert('¡Gracias! Tu recomendación se ha enviado correctamente.');
+
+            // Limpiar y dejar un mensaje
+            commentTextarea.value = '';
+            likeBtn.classList.remove('active');
+            dislikeBtn.classList.remove('active');
+            lastRating = null;
+            ratingMessage.textContent = 'Gracias por compartir tu opinión.';
+            // Opcional: si quieres ocultar otra vez el cuadro:
+            // commentGroup.style.display = 'none';
+        });
+    }
+</script>
+
+</script>
+
+</body>
+</html>
